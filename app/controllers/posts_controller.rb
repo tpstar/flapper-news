@@ -1,22 +1,24 @@
 class PostsController < ApplicationController
 
   def index
-    respond_with Post.all
+    posts = Post.all
+    render json: posts, status: 201
   end
 
   def create
-    respond_with Post.create(post_params)
+    post = Post.create(post_params)
+    render json: post
   end
 
   def show
-    respond_with Post.find(params[:id])
+    render json: Post.find(params[:id])
   end
 
   def upvote
     post = Post.find(params[:id])
     post.increment!(:upvotes)
 
-    respond_with post
+    render json: post
   end
 
   private

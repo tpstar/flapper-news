@@ -1,11 +1,8 @@
 angular.module('flapperNews')
-  .controller('PostsCtrl', [
-    '$scope',
-    '$stateParams',
-    'posts', //factory 'posts'
-    function($scope, $stateParams, posts){
-      $scope.post = posts.posts[$stateParams.postID];
-      // console.log($scope.post);
+  .controller('PostsCtrl', ['$scope', '$stateParams', 'posts', 'postsArray', //factory 'posts' and 'postsArray from app state resolve'
+
+    function($scope, $stateParams, posts, postsArray){
+      $scope.post = postsArray[$stateParams.postID];
       $scope.post.comments = [];
       $scope.incrementUpvotes = function(comment) {
         comment.upvotes += 1;
