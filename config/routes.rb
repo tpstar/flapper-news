@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:create, :index, :show] do
     resources :comments, only: [:show, :create] do
       member do
-        put '/upvote' => 'comments#upvote'
+        put '/upvotes' => 'comments#upvote'
       end
     end
 

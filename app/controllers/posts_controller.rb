@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   end
 
   def upvote
+    # binding.pry
     post = Post.find(params[:id])
     post.increment!(:upvotes)
 
