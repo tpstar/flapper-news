@@ -1,8 +1,9 @@
 angular.module('flapperNews')
-  .controller('PostsCtrl', ['$scope', '$stateParams', 'posts', 'postsArray', //factory 'posts' and 'postsArray from app state resolve'
+  .controller('PostsCtrl', ['$scope', 'posts', 'postData',//factory 'posts' and 'postsArray from app state resolve'
 
-    function($scope, $stateParams, posts, postsArray){
-      $scope.post = postsArray[$stateParams.postID];
+    function($scope, posts, postData){
+      console.log(postData);
+      $scope.post = postData;
       $scope.post.comments = [];
       $scope.incrementUpvotes = function(comment) {
         comment.upvotes += 1;
@@ -12,7 +13,8 @@ angular.module('flapperNews')
         if($scope.body === "") {return;}
         $scope.post.comments.push({
           body: $scope.body,
-          author: 'user'
+          author: 'user',
+          upvotes: 0
         });
         $scope.body = '';
       }

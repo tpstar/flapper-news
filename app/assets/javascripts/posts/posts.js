@@ -2,7 +2,7 @@ angular.module('flapperNews')
   .factory('posts', ['$http',
     function($http){
       return {
-        all, create, upvote
+        all, create, upvote, get
       }
 
       function all(){
@@ -36,6 +36,13 @@ angular.module('flapperNews')
         }
         return $http(req) //route will call upvote method in PostsController
           .then(post.upvotes += 1) //for view
+      }
+
+      function get(id) {
+        console.log(id);
+        return $http.get('/posts/' + id + '.json')
+          .then(response => response.data)
+          .catch(err => console.log(err))
       }
 
   }]);
