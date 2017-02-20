@@ -34,6 +34,22 @@ angular.module('flapperNews', ['ui.router', 'templates', 'Devise'])
           //in postCtrl $scope.post = postData; //postData = {id: 7, title: "new post" ...}
           //in _post.html {{post.title}}
         }
+      })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'auth/_login.html',
+        controller: 'AuthCtrl',
+        onEnter: ['$state', 'Auth', function($state, Auth) {
+          $state.go('home');
+        }]
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'auth/_register.html',
+        controller: 'AuthCtrl',
+      onEnter: ['$state', 'Auth', function($state, Auth) {
+        $state.go('home');
+      }]
       });
 
     $urlRouterProvider.otherwise('home');
