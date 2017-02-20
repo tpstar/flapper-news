@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   def create
     post = Post.find(params[:post_id])
     comment = post.comments.create(comment_params)
-    render json: post, comment
+    render json: comment
   end
 
   def upvote
@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     comment = post.comments.find(params[:id])
     comment.increment!(:upvotes)
 
-    render json: post, comment
+    render json: comment
   end
 
   private
@@ -19,3 +19,5 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:body)
   end
+
+end

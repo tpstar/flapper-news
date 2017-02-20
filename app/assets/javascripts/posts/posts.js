@@ -2,7 +2,7 @@ angular.module('flapperNews')
   .factory('posts', ['$http',
     function($http){
       return {
-        all, create, upvote, get
+        all, create, upvote, get, addComment
       }
 
       function all(){
@@ -39,10 +39,23 @@ angular.module('flapperNews')
       }
 
       function get(id) {
-        console.log(id);
         return $http.get('/posts/' + id + '.json')
           .then(response => response.data)
           .catch(err => console.log(err))
+      }
+
+      function addComment(id, commentInput) {
+        // console.log(commentInput);
+        const req = {
+          method: 'POST',
+          url: '/posts/' + id + '/comments.json',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: commentInput
+        }
+        return $http(req)
+          .then(response => response.data) // response.data = {id:10, body: "comment1", ...}
       }
 
   }]);

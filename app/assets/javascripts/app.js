@@ -33,8 +33,6 @@ angular.module('flapperNews', ['ui.router', 'templates'])
           //in app.js send postDate to PostsCtrl
           //in postCtrl $scope.post = postData; //postData = {id: 7, title: "new post" ...}
           //in _post.html {{post.title}}
-
-
         }
       });
 
