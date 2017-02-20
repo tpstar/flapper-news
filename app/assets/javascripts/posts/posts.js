@@ -2,7 +2,7 @@ angular.module('flapperNews')
   .factory('posts', ['$http',
     function($http){
       return {
-        all, create, upvote, get, addComment
+        all, create, upvote, get, addComment, upvoteComment
       }
 
       function all(){
@@ -56,6 +56,18 @@ angular.module('flapperNews')
         }
         return $http(req)
           .then(response => response.data) // response.data = {id:10, body: "comment1", ...}
+      }
+
+      function upvoteComment(post, comment) {
+        const req = {
+          method: 'PUT',
+          url: '/posts/' + post.id + '/comments/' + comment.id + '/upvotes.json',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+        return $http(req)
+          .then(comment.upvotes += 1) //for view because its bound to $scope in postsCtrl you can change view in this service
       }
 
   }]);
