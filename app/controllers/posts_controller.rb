@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_action :authenticate_user!, only: [:create, :upvote]
+
   def index
     posts = Post.all
     render json: posts, status: 201

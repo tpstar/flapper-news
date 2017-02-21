@@ -1,6 +1,6 @@
 angular.module('flapperNews')
-  .controller('AuthCtrl', ['$scope', 'Auth', '$state',
-    function($scope, Auth, $state) {
+  .controller('AuthCtrl', ['$scope', '$state', 'Auth',
+    function($scope, $state, Auth) {
 
       $scope.login = function(){
         Auth.login($scope.user)

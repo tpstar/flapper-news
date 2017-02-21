@@ -1,7 +1,7 @@
 angular.module('flapperNews')
   .controller('NavCtrl', ['$scope', 'Auth',
     function($scope, Auth) {
-      console.log(Auth.isAuthenticated)
+
       $scope.signedIn = Auth.isAuthenticated;
       $scope.logout = Auth.logout;
 
