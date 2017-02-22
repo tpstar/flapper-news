@@ -50,9 +50,12 @@ angular.module('flapperNews', ['ui.router', 'templates', 'Devise'])
         templateUrl: 'auth/_register.html',
         controller: 'AuthCtrl',
         onEnter: ['$state', 'Auth', function($state, Auth) {
-          Auth.currentUser().then(function(){
+          Auth.currentUser().then(function(user){
+            console.log(user);
             $state.go('home');
-          })
+          }), function(error) {
+            console.log(error)
+          }
         }]
       });
 

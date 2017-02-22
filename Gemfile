@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "bower-rails", "~> 0.11.0"
+
 gem 'devise'
 
 gem 'active_model_serializers'

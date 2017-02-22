@@ -6,7 +6,9 @@ angular.module('flapperNews')
       $scope.logout = Auth.logout;
 
       Auth.currentUser()
-        .then(user => $scope.user = user)
+        .then(function(user) {
+          $scope.user = user;
+        })
 
       $scope.$on('devise:new-registration', function(e, user) {
         $scope.user = user;
@@ -14,6 +16,10 @@ angular.module('flapperNews')
 
       $scope.$on('devise:login', function(e, user) {
         $scope.user = user;
+      });
+
+      $scope.$on('devise:new-session', function(event, currentUser) {
+          // user logged in by Auth.login({...})
       });
 
       $scope.$on('devise:logout', function(e, user) {

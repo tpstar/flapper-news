@@ -48,6 +48,7 @@ GEM
       tilt
     arel (7.1.4)
     bcrypt (3.1.11)
+    bower-rails (0.11.0)
     builder (3.2.3)
     byebug (9.0.6)
     coderay (1.1.1)
@@ -171,6 +172,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   angular-rails-templates
+  bower-rails (~> 0.11.0)
   byebug
   devise
   jbuilder (~> 2.5)

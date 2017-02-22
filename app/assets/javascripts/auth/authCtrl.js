@@ -4,7 +4,10 @@ angular.module('flapperNews')
 
       $scope.login = function(){
         Auth.login($scope.user)
-          .then(() => $state.go('home'))
+          .then(function(user) {
+            console.log(user);
+            $state.go('home');
+        })
       }
       $scope.register = function(){
         Auth.register($scope.user)
