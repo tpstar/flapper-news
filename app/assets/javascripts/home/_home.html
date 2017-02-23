@@ -16,6 +16,9 @@
         {{post.title}}
       </span>
     </span>
+    <span>posted by
+      <a ng-href="#/users/{{post.user.username}}">{{post.user.username}}</a>
+    </span>
     <span>
       <a ui-sref="posts({postID: post.id})">Comments</a> <!-- ui-sref calls posts state -->
     </span>
