@@ -3,6 +3,7 @@ angular.module('flapperNews')
     function($scope, $state, Auth) {
 
       $scope.login = function(){
+        console.log("I am in authCtrl")
         Auth.login($scope.user)
           .then(function(user) {
             console.log(user);
