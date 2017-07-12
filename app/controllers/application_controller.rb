@@ -1,9 +1,17 @@
+require 'open-uri'
+#require 'mechanize'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   respond_to :json
 
   def angular
+
+    page = Nokogiri::HTML(open"http://tpstar.github.io/")
+    han = page.css("h1").text
+    binding.pry
+
     render 'layouts/application'
   end
 
