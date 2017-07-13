@@ -1,5 +1,5 @@
 require 'open-uri'
-#require 'mechanize'
+require 'mechanize'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
@@ -8,8 +8,26 @@ class ApplicationController < ActionController::Base
 
   def angular
 
-    page = Nokogiri::HTML(open"http://tpstar.github.io/")
-    han = page.css("h1").text
+    agent = Mechanize.new
+    page = agent.get("http://www.sigmaaldrich.com/catalog/search?term=toluene&interface=All&N=0&mode=match%20partialmax&lang=en&region=US&focus=product")
+    # get chemical name
+    name = page.at("a .name").text
+    # get properties
+    properties = []
+    page.at(".nonSynonymProperties").css("p").map do |p|
+      property = p.text
+      properties.push(property)
+    end
+    # get formula
+    formula = properties[0].split(":").last
+    formula[0] = "" #this is to remove weird white space left after split
+    # get molecular weight
+    mol_weight = properties[1].split(":").last
+    mol_weight[0] = ""  #this is to remove weird white space left after split
+    # get link with Projects text
+    # link = page.link_with(text: "Projects")
+    # project_page = link.click
+
     binding.pry
 
     render 'layouts/application'
