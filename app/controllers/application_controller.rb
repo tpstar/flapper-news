@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'mechanize'
+require 'uri'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
@@ -8,8 +9,9 @@ class ApplicationController < ActionController::Base
 
   def angular
 
+    chem_search_term = URI.encode("ethylene oxide")
     agent = Mechanize.new
-    page = agent.get("http://www.sigmaaldrich.com/catalog/search?term=toluene&interface=All&N=0&mode=match%20partialmax&lang=en&region=US&focus=product")
+    page = agent.get("http://www.sigmaaldrich.com/catalog/search?term=#{chem_search_term}&interface=All&N=0&mode=match%20partialmax&lang=en&region=US&focus=product")
     # get chemical name
     name = page.at("a .name").text
     # get properties
