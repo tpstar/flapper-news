@@ -27,8 +27,8 @@ class ApplicationController < ActionController::Base
     mol_weight = properties[1].split(":").last
     mol_weight[0] = ""  #this is to remove weird white space left after split
     # get link with Projects text
-    # link = page.link_with(text: "Projects")
-    # project_page = link.click
+    product_link = page.links_with(href: %r{^/catalog/product/aldrich/\w+})[0]
+    product_page = product_link.click
 
     binding.pry
 
