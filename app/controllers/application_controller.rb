@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def angular
 
-    chem_search_term = URI.encode("ethylene oxide")
+    chem_search_term = URI.encode("sulfolane")
     agent = Mechanize.new
     page = agent.get("http://www.sigmaaldrich.com/catalog/search?term=#{chem_search_term}&interface=All&N=0&mode=match%20partialmax&lang=en&region=US&focus=product")
     # get chemical name
@@ -23,12 +23,26 @@ class ApplicationController < ActionController::Base
     # get formula
     formula = properties[0].split(":").last
     formula[0] = "" #this is to remove weird white space left after split
-    # get molecular weight
-    mol_weight = properties[1].split(":").last
-    mol_weight[0] = ""  #this is to remove weird white space left after split
+    # get molecular weight (formula weight)
+    fw = properties[1].split(":").last
+    fw[0] = ""  #this is to remove weird white space left after split
     # get link with Projects text
     product_link = page.links_with(href: %r{^/catalog/product/aldrich/\w+})[0]
     product_page = product_link.click
+    # get more properties from product page (generate arrays of strings of keys and values)
+    more_properties = []
+    product_page.search("#productDetailProperties td").text.squish.split(" ").map do |p|
+      more_properties.push(p)
+    end
+    # get density (get index of "density" first; density value comes after "density" in more_properties array)
+    density_index = more_properties.index("density")
+    density = more_properties[density_index + 1]
+    # get mp (get index of "mp" first; mp value comes after "mp" in more_properties array)
+    mp_index = more_properties.index("mp")
+    mp = more_properties[mp_index + 1]
+    # get bp (get index of "bp" first; bp value comes after "bp" in more_properties array)
+    bp_index = more_properties.index("bp")
+    bp = more_properties[bp_index + 1]
 
     binding.pry
 
